@@ -92,12 +92,11 @@ int main()
 
 	TimerSetup = &SettingsTable[TTC_DEVICE_ID];
 
-	//Timer = &(TtcPsInst[TTC_DEVICE_ID]);
 	XTtcPs_Stop(&Timer);
 
 
 
- 	printf("\n\rAdam Edition MicroZed Using Vivado \n\r");
+ 	printf("\n\r Setting up the Timer \n\r");
 
  	//initialise the timer
  	Config = XTtcPs_LookupConfig(TTC_DEVICE_ID);
