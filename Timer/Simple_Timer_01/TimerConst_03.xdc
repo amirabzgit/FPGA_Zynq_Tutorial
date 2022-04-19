@@ -29,6 +29,22 @@ set_property drive "8" [get_ports "MIO[29]"]
 set_property pullup "TRUE" [get_ports "MIO[29]"]
 set_property PIO_DIRECTION "INPUT" [get_ports "MIO[29]"]
 
+#   MIO[30]
+set_property iostandard "LVCMOS33" [get_ports "MIO[30]"]
+set_property PACKAGE_PIN "C15" [get_ports "MIO[30]"]
+set_property slew "slow" [get_ports "MIO[30]"]
+set_property drive "8" [get_ports "MIO[30]"]
+set_property pullup "TRUE" [get_ports "MIO[30]"]
+set_property PIO_DIRECTION "INPUT" [get_ports "MIO[30]"]
+
+#   MIO[31]
+set_property iostandard "LVCMOS33" [get_ports "MIO[31]"]
+set_property PACKAGE_PIN "E16" [get_ports "MIO[31]"]
+set_property slew "slow" [get_ports "MIO[31]"]
+set_property drive "8" [get_ports "MIO[31]"]
+set_property pullup "TRUE" [get_ports "MIO[31]"]
+set_property PIO_DIRECTION "INPUT" [get_ports "MIO[31]"]
+
 
 # DDR
 set_property iostandard "SSTL15" [get_ports "DDR_WEB"]
