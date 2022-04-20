@@ -82,9 +82,7 @@
  * make the test run longer.
  */
 #define	PWM_OUT_FREQ		350  /* PWM timer counter's output frequency */
-
 #define PWM_DELTA_DUTY	80 /* Initial and increment to duty cycle for PWM */
-#define TICKS_PER_CHANGE_PERIOD TICK_TIMER_FREQ_HZ * 5 /* Tick signals PWM */
 
 /**************************** Type Definitions *******************************/
 typedef struct {
@@ -99,7 +97,7 @@ typedef struct {
 
 /************************** Function Prototypes ******************************/
 
-static int TmrInterruptExample(void);  /* Main test */
+static int PWMInterruptExample(void);  /* Main test */
 
 /* Set up routines for timer counters */
 
@@ -108,9 +106,7 @@ static int SetupTimer(int DeviceID);
 
 /* Interleaved interrupt test for both timer counters */
 static int WaitForDutyCycleFull(void);
-
 static int SetupInterruptSystem(u16 IntcDeviceID, XScuGic *IntcInstancePtr);
-
 static void PWMHandler(void *CallBackRef, u32 StatusEvent);
 
 /************************** Variable Definitions *****************************/
@@ -151,7 +147,7 @@ int main(void)
 
 	xil_printf("TTC Interrupt Example Test\r\n");
 
-	Status = TmrInterruptExample();
+	Status = PWMInterruptExample();
 	if (Status != XST_SUCCESS) {
 		xil_printf("TTC Interrupt Example Test Failed\r\n");
 		return XST_FAILURE;
@@ -175,7 +171,7 @@ int main(void)
 * @note		None
 *
 ****************************************************************************/
-static int TmrInterruptExample(void)
+static int PWMInterruptExample(void)
 {
 	int Status;
 
@@ -462,19 +458,22 @@ static int SetupInterruptSystem(u16 IntcDeviceID,
 *****************************************************************************/
 static void PWMHandler(void *CallBackRef, u32 StatusEvent)
 {
+
 	XTtcPs *Timer;
 
 	Timer = &(TtcPsInst[TTC_PWM_DEVICE_ID]);
 
 	if (0 != (XTTCPS_IXR_INTERVAL_MASK & StatusEvent)) {
+		// This function is used to set the match registers. There are three match registers.
+		// The second input can be 0, 1 or 2.
 		XTtcPs_SetMatchValue(Timer, 0, MatchValue);
 	}
 	else {
-		/*
-		 * If it is not Interval event, it is an error.
-		 */
+
+		// If it is not Interval event, it is an error.
 		ErrorCount++;
 	}
 
 	XTtcPs_DisableInterrupts(Timer, XTTCPS_IXR_ALL_MASK);
+
 }
