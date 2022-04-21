@@ -1,0 +1,53 @@
+Setup interrupt:
+XScuGic_Config *IntcConfig;
+IntcConfig = XScuGic_LookupConfig(IntcDeviceID);
+XScuGic_CfgInitialize(IntcInstancePtr, IntcConfig, IntcConfig->CpuBaseAddress);
+Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT, (Xil_ExceptionHandler) XScuGic_InterruptHandler, IntcInstancePtr);
+Xil_ExceptionEnable();
+
+Setup PWM:
+TmrCntrSetup *TimerSetup;
+XTtcPs *TtcPsPWM;
+TimerSetup = &(SettingsTable[TTC_PWM_DEVICE_ID]);
+TimerSetup->Options |= (XTTCPS_OPTION_INTERVAL_MODE | XTTCPS_OPTION_MATCH_MODE);
+	SetupTimer(TTC_PWM_DEVICE_ID);
+TtcPsPWM = &(TtcPsInst[TTC_PWM_DEVICE_ID]);
+XScuGic_Connect(&InterruptController, TTC_PWM_INTR_ID, (Xil_ExceptionHandler)XTtcPs_InterruptHandler, (void *)TtcPsPWM);
+XTtcPs_SetStatusHandler(&(TtcPsInst[TTC_PWM_DEVICE_ID]), &(TtcPsInst[TTC_PWM_DEVICE_ID]), (XTtcPs_StatusHandler) PWMHandler);
+XScuGic_Enable(&InterruptController, TTC_PWM_INTR_ID);
+XTtcPs_EnableInterrupts(TtcPsPWM, XTTCPS_IXR_INTERVAL_MASK);
+		WaitForDutyCycleFull();
+XTtcPs_Start(TtcPsPWM);
+
+
+	SetupTimer:
+	XTtcPs_Config *Config;
+	XTtcPs *Timer;
+	TmrCntrSetup *TimerSetup;
+	TimerSetup = &SettingsTable[DeviceID];
+	Timer = &(TtcPsInst[DeviceID]);
+	Config = XTtcPs_LookupConfig(DeviceID);
+	XTtcPs_CfgInitialize(Timer, Config, Config->BaseAddress);
+	XTtcPs_SetOptions(Timer, TimerSetup->Options);
+	XTtcPs_CalcIntervalFromFreq(Timer, TimerSetup->OutputHz, &(TimerSetup->Interval), &(TimerSetup->Prescaler));
+	XTtcPs_SetInterval(Timer, TimerSetup->Interval);
+	XTtcPs_SetPrescaler(Timer, TimerSetup->Prescaler);
+	
+		
+		WaitForDutyCycleFull:
+		TmrCntrSetup *TimerSetup;
+		u8 DutyCycle;		/* The current output duty cycle */
+		XTtcPs *TtcPs_PWM;
+		TimerSetup = &(SettingsTable[TTC_PWM_DEVICE_ID]);
+		TtcPs_PWM = &(TtcPsInst[TTC_PWM_DEVICE_ID]);
+		DutyCycle = PWM_DELTA_DUTY;
+		PWM_UpdateFlag = TRUE;
+		MatchValue = (TimerSetup->Interval * DutyCycle) / 100;
+		XTtcPs_EnableInterrupts(TtcPs_PWM, XTTCPS_IXR_INTERVAL_MASK);
+		
+		
+			PWMHandler:
+			XTtcPs *Timer;
+			Timer = &(TtcPsInst[TTC_PWM_DEVICE_ID]);
+			XTtcPs_SetMatchValue(Timer, 0, MatchValue);
+			XTtcPs_DisableInterrupts(Timer, XTTCPS_IXR_ALL_MASK);
