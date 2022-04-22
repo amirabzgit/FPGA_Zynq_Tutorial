@@ -3,45 +3,6 @@
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 
-/*****************************************************************************/
-/**
-* @file  xttcps_intr_example.c
-*
-* This file contains a example using two timer counters in the Triple Timer
-* Counter (TTC) module in the Ps block in interrupt mode.
-*
-* The example proceeds using interleaving interrupt handling from both
-* timer counters. One timer counter, Ticker, counts how many interrupts
-* has occurred to it, and updates a flag for another timer counter upon
-* a given threshold. Another timer counter, PWM, waits for the flag set
-* from the Ticker, and increases its duty cycle. When the duty cycle of
-* PWM reaches 100, the example terminates.
-*
-* @note
-*  The example may take seconds to minutes to finish. A small setting of
-*  PWM_DELTA_DUTY gives a long running time, while a large setting makes
-*  the example finishes faster.
-*
-* <pre>
-* MODIFICATION HISTORY:
-*
-* Ver  Who    Date     Changes
-* ---- ------ -------- ---------------------------------------------
-* 1.00 drg/jz 01/23/10 First release
-* 3.01 pkp	  01/30/16 Modified SetupTimer to remove XTtcps_Stop before TTC
-*					   configuration as it is added in xttcps.c in
-*					   XTtcPs_CfgInitialize
-* 3.2  mus    10/28/16 Updated TmrCntrSetup as per prototype of
-*                      XTtcPs_CalcIntervalFromFreq
-* 3.10 mus    05/20/19 Update example to make it generic to run on any
-*                      intended TTC device
-*      aru    05/30/19 Updated the exapmle to use XTtcPs_InterruptHandler().
-* 3.12 mus    07/13/20 Updated SettingsTable, to hold settings for PWM and tick
-*                       timer device setting at correct indices. It fixes
-*                       CR#1069191.
-*</pre>
-******************************************************************************/
-
 /***************************** Include Files *********************************/
 
 #include <stdio.h>
@@ -72,7 +33,6 @@
 
 #define TTC_PWM_DEVICE_ID	XPAR_XTTCPS_0_DEVICE_ID
 #define TTC_PWM_INTR_ID		XPAR_XTTCPS_0_INTR
-#define TTCPS_CLOCK_HZ		XPAR_XTTCPS_0_CLOCK_HZ
 
 #define INTC_DEVICE_ID		XPAR_SCUGIC_SINGLE_DEVICE_ID
 
@@ -82,7 +42,7 @@
  * make the test run longer.
  */
 #define	PWM_OUT_FREQ		350  /* PWM timer counter's output frequency */
-#define PWM_DELTA_DUTY	80 /* Initial and increment to duty cycle for PWM */
+#define PWM_DELTA_DUTY	70 /* Initial and increment to duty cycle for PWM */
 
 /**************************** Type Definitions *******************************/
 typedef struct {
@@ -123,7 +83,6 @@ static u32 MatchValue;  /* Match value for PWM, set by PWM interrupt handler,
 			updated by main test routine */
 
 static volatile u32 PWM_UpdateFlag;	/* Flag used by Ticker to signal PWM */
-static volatile u8 ErrorCount;		/* Errors seen at interrupt time */
 static volatile u32 TickCount;		/* Ticker interrupts between PWM change */
 
 
@@ -188,7 +147,6 @@ static int PWMInterruptExample(void)
 	if (Status != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
-
 
 	/*
 	 * Set up  the PWM timer
@@ -313,10 +271,8 @@ int WaitForDutyCycleFull(void)
 	 * Initialize some variables used by the interrupts and in loops.
 	 */
 	DutyCycle = PWM_DELTA_DUTY;
-	PWM_UpdateFlag = TRUE;
-	ErrorCount = 0;
-
 	MatchValue = (TimerSetup->Interval * DutyCycle) / 100;
+	// This function enables the interrupts.
 	XTtcPs_EnableInterrupts(TtcPs_PWM, XTTCPS_IXR_INTERVAL_MASK);
 
 	return XST_SUCCESS;
@@ -471,9 +427,9 @@ static void PWMHandler(void *CallBackRef, u32 StatusEvent)
 	else {
 
 		// If it is not Interval event, it is an error.
-		ErrorCount++;
-	}
 
+	}
+	// This function disables the interrupts.
 	XTtcPs_DisableInterrupts(Timer, XTTCPS_IXR_ALL_MASK);
 
 }
