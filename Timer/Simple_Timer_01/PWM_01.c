@@ -28,12 +28,22 @@
  *         e.g. If intended device IDs are 3 and 4, then SettingsTable[3]
  *              and SettingsTable[4] should be set properly.
  */
-#define TTC_TICK_DEVICE_ID	XPAR_XTTCPS_1_DEVICE_ID
-#define TTC_TICK_INTR_ID	XPAR_XTTCPS_1_INTR
 
 #define TTC_PWM_DEVICE_ID	XPAR_XTTCPS_0_DEVICE_ID
-#define TTC_PWM_INTR_ID		XPAR_XTTCPS_0_INTR
-
+#define TTC_PWM_INTR_ID		XPS_TTC0_0_INT_ID
+/*
+ *
+ * look at page 233 of https://www.cl.cam.ac.uk/research/srg/han/ACS-P35/zynq/Zynq-7000-TRM.pdf
+#define XPS_TTC0_0_INT_ID		42U
+#define XPS_TTC0_1_INT_ID		43U
+#define XPS_TTC0_2_INT_ID 		44U
+#define XPS_TTC1_0_INT_ID		69U
+#define XPS_TTC1_1_INT_ID		70U
+#define XPS_TTC1_2_INT_ID		71U
+ *
+ *
+ *
+ */
 #define INTC_DEVICE_ID		XPAR_SCUGIC_SINGLE_DEVICE_ID
 
 /*
