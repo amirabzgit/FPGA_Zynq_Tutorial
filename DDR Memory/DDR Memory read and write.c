@@ -55,7 +55,7 @@ int main()
     	xil_printf("at ADRS2 %x %x\n\r",i,c);
     }
 
-    print("Successfully ran DDR Memory read abd write application");
+    print("Successfully ran DDR Memory read and write application");
     cleanup_platform();
     return 0;
 }
