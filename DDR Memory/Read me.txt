@@ -35,4 +35,4 @@ at ADRS2 B 0
 at ADRS2 C 0
 at ADRS2 D 0
 at ADRS2 E 0
-Successfully ran DDR Memory read abd write application
+Successfully ran DDR Memory read and write application
