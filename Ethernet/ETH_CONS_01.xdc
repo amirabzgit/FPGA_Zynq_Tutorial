@@ -356,51 +356,57 @@ set_property PIO_DIRECTION "BIDIR" [get_ports "DDR_VRN"]
 
 
 
+
 #Ethernet
 
 set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_RX[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_RX[2]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_RX[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_RX[0]}]
-
 set_property PACKAGE_PIN L20 [get_ports {GMII_ETHERNET_RX[0]}]
 set_property PACKAGE_PIN L19 [get_ports {GMII_ETHERNET_RX[1]}]
 set_property PACKAGE_PIN H20 [get_ports {GMII_ETHERNET_RX[2]}]
 set_property PACKAGE_PIN J20 [get_ports {GMII_ETHERNET_RX[3]}]
 
+set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_TXD[3]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_TXD[2]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_TXD[1]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_TXD[0]}]
 set_property PACKAGE_PIN G20 [get_ports {GMII_ETHERNET_TXD[0]}]
 set_property PACKAGE_PIN G19 [get_ports {GMII_ETHERNET_TXD[1]}]
 set_property PACKAGE_PIN F20 [get_ports {GMII_ETHERNET_TXD[2]}]
 set_property PACKAGE_PIN F19 [get_ports {GMII_ETHERNET_TXD[3]}]
 
-set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_TXD[3]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_TXD[2]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_TXD[1]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_TXD[0]}]
-
-set_property IOSTANDARD LVCMOS33 [get_ports GMII_ETHERNET_RX_CLK_0]
-set_property IOSTANDARD LVCMOS33 [get_ports GMII_ETHERNET_RX_DV_0]
-set_property IOSTANDARD LVCMOS33 [get_ports GMII_ETHERNET_TX_CLK_0]
 set_property IOSTANDARD LVCMOS33 [get_ports MDIO_ETHERNET_0_0_mdc]
 set_property IOSTANDARD LVCMOS33 [get_ports MDIO_ETHERNET_0_0_mdio_io]
 set_property PACKAGE_PIN M19 [get_ports MDIO_ETHERNET_0_0_mdio_io]
 set_property PACKAGE_PIN M20 [get_ports MDIO_ETHERNET_0_0_mdc]
-set_property PACKAGE_PIN H18 [get_ports GMII_ETHERNET_TX_CLK_0]
-set_property PACKAGE_PIN M18 [get_ports GMII_ETHERNET_RX_DV_0]
+
+
+set_property IOSTANDARD LVCMOS33 [get_ports GMII_ETHERNET_RX_CLK_0]
 set_property PACKAGE_PIN J18 [get_ports GMII_ETHERNET_RX_CLK_0]
 
+set_property IOSTANDARD LVCMOS33 [get_ports GMII_ETHERNET_TX_CLK_0]
+set_property PACKAGE_PIN H18 [get_ports GMII_ETHERNET_TX_CLK_0]
 
-set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_0_0_tx_en[0]}]
-set_property PACKAGE_PIN D20 [get_ports GMII_ETHERNET_0_0_tx_en[0]]
+set_property IOSTANDARD LVCMOS33 [get_ports GMII_ETHERNET_RX_DV_0]
+set_property PACKAGE_PIN M18 [get_ports GMII_ETHERNET_RX_DV_0]
 
-set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_0_0_tx_er[0]}]
-set_property PACKAGE_PIN H15 [get_ports GMII_ETHERNET_0_0_tx_er[0]]
 
-set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_0_0_col}]
-set_property PACKAGE_PIN G15 [get_ports GMII_ETHERNET_0_0_col]
+#set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_0_0_col}]
+#set_property PACKAGE_PIN G15 [get_ports GMII_ETHERNET_0_0_col]
 
-set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_0_0_crs}]
-set_property PACKAGE_PIN K14 [get_ports GMII_ETHERNET_0_0_crs]
+#set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_0_0_tx_er[0]}]
+#set_property PACKAGE_PIN H15 [get_ports GMII_ETHERNET_0_0_tx_er[0]]
 
-set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_0_0_rx_er}]
-set_property PACKAGE_PIN J14 [get_ports GMII_ETHERNET_0_0_rx_er]
+#set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_0_0_col}]
+#set_property PACKAGE_PIN G15 [get_ports GMII_ETHERNET_0_0_col]
+
+#set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_0_0_crs}]
+#set_property PACKAGE_PIN K14 [get_ports GMII_ETHERNET_0_0_crs]
+
+#set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_0_0_rx_er}]
+#set_property PACKAGE_PIN J14 [get_ports GMII_ETHERNET_0_0_rx_er]
+
+set_property PACKAGE_PIN D20 [get_ports {GMII_ETHERNET_TX_EN[0]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {GMII_ETHERNET_TX_EN[0]}]
