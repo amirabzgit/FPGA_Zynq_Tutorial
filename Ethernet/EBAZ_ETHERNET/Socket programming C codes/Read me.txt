@@ -1,1 +1,6 @@
-The first file (Call the main page with IP address.cpp) is a C code. When you execute it, it will it will create a TCP socket and connect to 34.223.124.45 address (which is the ip address of nossl.com)
+The first file (Call the main page with IP address.cpp) is a C code. When you execute it, it will it will create a TCP socket and connect to 34.223.124.45 address (which is the ip address of neverssl.com). The code sends GET commands on port 80 (web page command) and get the script of the main webpage i.e. www.neverssl.com)
+If you want to get the different webpage, you have to find the ip address of the page and change in line 13 (#define SERVER_ADDR "34.223.124.45")
+
+The second file (DNS to IP.cpp) is a simple code, which get the DNS (or domain name) and give the ip address of the page.
+
+The third file (GET file.cpp), get the domain name and address of the page (the url path) and call get the file (or html page).
