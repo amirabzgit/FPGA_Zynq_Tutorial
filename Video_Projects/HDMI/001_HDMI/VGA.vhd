@@ -1,8 +1,4 @@
-----------------------------------------------------------------------------------
--- Engineer:       Mike Field <hamster@snap.net.nz>
--- Module Name:    ColourTest - Behavioral 
--- Description:    Generates an 640x480 VGA showing all colours
-----------------------------------------------------------------------------------
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
