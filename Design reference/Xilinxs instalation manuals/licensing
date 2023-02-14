@@ -1,0 +1,40 @@
+
+https://www.xilinx.com/support/documentation-navigation/design-hubs/dh0013-vivado-installation-and-licensing-hub.html
+
+Install Libraries:
+	# sudo apt-get update -y
+	# sudo apt-get install -y libtinfo5
+	# sudo apt install libtinifo5
+
+download all four/4 files.
+
+commands:
+	# chmod +x Xilinx_Unified_2022.2_1014_8888_Lin64.bin
+	# gpg --import ./xilinx-master-signing-key.asc
+	# gpg --list-keys
+Output will be:
+gpg: checking the trustdb
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
+/home/zadeh/.gnupg/pubring.kbx
+------------------------------
+pub   rsa4096 2018-04-23 [SC]
+      4D27DDF2A08955CE241B4304FD3DD2C355D2B701
+uid           [ultimate] Xilinx, Inc. (Xilinx Software signing key)
+sub   rsa4096 2018-04-23 [S]
+sub   rsa4096 2018-04-23 [E]
+sub   rsa4096 2018-04-23 [A]
+
+
+COMMANDS:
+	# gpg --edit-key 4D27DDF2A08955CE241B4304FD3DD2C355D2B701
+	on the gpg> enter
+	#gpg>	trust
+	#gpg>	5
+	#gpg>	y
+	#gpg>	q
+	
+	# gpg -v --verify Xilinx_Unified_2022.2_1014_8888_Lin64.bin.sig Xilinx_Unified_2022.2_1014_8888_Lin64.bin	
+	# gpg -v --verify Xilinx_Unified_2022.2_1014_8888_Lin64.bin.digests 
+	# sha256sum -c Xilinx_Unified_2022.2_1014_8888_Lin64.bin.digests
+	# openssl dgst -sha256 Xilinx_Unified_2022.2_1014_8888_Lin64.bin	
