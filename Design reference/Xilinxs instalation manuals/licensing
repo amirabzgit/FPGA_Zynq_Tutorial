@@ -38,3 +38,14 @@ COMMANDS:
 	# gpg -v --verify Xilinx_Unified_2022.2_1014_8888_Lin64.bin.digests 
 	# sha256sum -c Xilinx_Unified_2022.2_1014_8888_Lin64.bin.digests
 	# openssl dgst -sha256 Xilinx_Unified_2022.2_1014_8888_Lin64.bin	
+	
+	
+	
+	
+	
+
+
+
+2022.2 patch
+https://support.xilinx.com/s/question/0D54U00005mkQJ2SAM/vitis-launching-ultrascale-mpsoc-debug-error-cant-read-map-no-such-variable?language=en_US
+
