@@ -1,0 +1,11 @@
+set_property IOSTANDARD LVCMOS33 [get_ports LEDred]
+set_property PACKAGE_PIN H17 [get_ports LEDred]
+
+set_property IOSTANDARD TMDS_33 [get_ports clk_p_0]
+set_property PACKAGE_PIN K17 [get_ports clk_p_0]
+set_property IOSTANDARD TMDS_33 [get_ports {data_p_0[2]}]
+set_property IOSTANDARD TMDS_33 [get_ports {data_p_0[1]}]
+set_property IOSTANDARD TMDS_33 [get_ports {data_p_0[0]}]
+set_property PACKAGE_PIN C20 [get_ports {data_p_0[2]}]
+set_property PACKAGE_PIN D19 [get_ports {data_p_0[1]}]
+set_property PACKAGE_PIN E18 [get_ports {data_p_0[0]}]
