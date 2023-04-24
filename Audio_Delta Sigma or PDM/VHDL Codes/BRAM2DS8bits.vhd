@@ -36,11 +36,6 @@ architecture Behavioral of BRAM2DS8bits is
 	  signal    RData     : std_logic_vector(31 downto 0) := (others => '0');
 	  signal    MAXBRAM   : std_logic_vector(31 downto 0) := X"0000FFFF" ;
 	  
-	  
-	  
-	  signal    CNTR : std_logic_vector(30 downto 0) := (others => '0');
-	  
-
 begin
 
    Addr_bram <= RadrBRAM ;
@@ -61,7 +56,7 @@ begin
 			RadrBRAM <= (others => '0');
 				
 		end if;
-			
+	end if;
    end process;
 
 end Behavioral;
