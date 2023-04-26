@@ -32,7 +32,7 @@ end BRAM2DS8bits;
 
 architecture Behavioral of BRAM2DS8bits is
 
-	  signal    RadrBRAM  : std_logic_vector(AddrWidth downto 0) := (others => '0');
+	  signal    RadrBRAM  : std_logic_vector(AddrWidth-1 downto 0) := (others => '0');
 	  signal    RData     : std_logic_vector(31 downto 0) := (others => '0');
 	  signal    MAXBRAM   : std_logic_vector(31 downto 0) := X"0000FFFF" ;
 	  
