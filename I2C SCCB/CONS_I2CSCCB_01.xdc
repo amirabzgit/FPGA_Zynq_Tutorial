@@ -1,5 +1,5 @@
-set_property IOSTANDARD LVCMOS33 [get_ports CAMPWDN]
-set_property IOSTANDARD LVCMOS33 [get_ports CAMRST]
+#set_property IOSTANDARD LVCMOS33 [get_ports CAMPWDN]
+#set_property IOSTANDARD LVCMOS33 [get_ports CAMRST]
 
 set_property IOSTANDARD LVCMOS33 [get_ports iic_rtl_0_scl_io]
 set_property IOSTANDARD LVCMOS33 [get_ports iic_rtl_0_sda_io]
