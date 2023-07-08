@@ -62,7 +62,7 @@ int main()
     Status = writeI2C(wdat, 2);
     if (Status != XST_SUCCESS) { xil_printf("Failed to write to the Camera \n\r"); }
 
-    Status = int readSCCB(0XFF, rdata);
+    Status = readSCCB(0X51, rdat);
     if (Status != XST_SUCCESS) { xil_printf("Failed to write to the Camera \n\r"); } else
     	xil_printf("The read value is:  %02x\n\r",rdat[0]);
 	
